@@ -31,23 +31,19 @@ jobs:
         with:
           enablement: true
 
-      - name: Extract website source archive
+      - name: Verify site files and asset paths
         run: |
-          test -f apexgrowth-website-github-actions.zip
-          mkdir -p extracted _site
-          unzip -q apexgrowth-website-github-actions.zip -d extracted
-          test -f extracted/apexgrowth-website/index.html
-          cp -a extracted/apexgrowth-website/. _site/
-          rm -rf _site/.github _site/README.md
+          test -f index.html
+          test -f styles.css
+          test -f script.js
+          test -f .nojekyll
+          grep -q 'href="./styles.css"' index.html
+          grep -q 'src="./script.js"' index.html
 
-      - name: Verify site files and relative paths
+      - name: Prepare Pages artifact
         run: |
-          test -f _site/index.html
-          test -f _site/styles.css
-          test -f _site/script.js
-          test -f _site/.nojekyll
-          grep -q 'href="./styles.css"' _site/index.html
-          grep -q 'src="./script.js"' _site/index.html
+          mkdir -p _site
+          cp index.html styles.css script.js .nojekyll _site/
 
       - name: Upload static site artifact
         uses: actions/upload-pages-artifact@v3
