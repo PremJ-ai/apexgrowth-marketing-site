@@ -20,15 +20,18 @@ python -m http.server 8000
 
 Then visit `http://localhost:8000`.
 
-## Deployment
+## First-time GitHub Pages setup
 
-Every push to `main` starts **Deploy ApexGrowth to GitHub Pages**. It copies the root site files into a deployment folder, verifies the HTML and relative asset paths, uploads the Pages artifact, and deploys it. A manual deployment is also available from the repository's **Actions** tab.
+1. Open repository **Settings → Pages**.
+2. Under **Build and deployment → Source**, select **GitHub Actions**.
+3. Open **Actions → Deploy ApexGrowth to GitHub Pages** and choose **Re-run jobs** for the latest run, or use **Run workflow**.
+4. After the run succeeds, visit `https://premj-ai.github.io/apexgrowth-marketing-site/`.
 
-Expected project Pages URL: `https://premj-ai.github.io/apexgrowth-marketing-site/`.
+The GitHub Actions workflow deploys on every push to `main`. It verifies that the root HTML, CSS and JavaScript files exist, checks JavaScript syntax, copies site assets into a clean deployment folder, uploads the Pages artifact and deploys it. The initial Pages source selection is required because this repository's workflow token cannot create a brand-new Pages site automatically.
 
 ## Before production
 
-- Replace the illustrative metrics and case-study figures with verified agency results.
+- Replace illustrative metrics and case-study figures with verified agency results.
 - Replace sample testimonial names and quotes with approved client testimonials.
 - Replace `hello@apexgrowth.example` with a real enquiry address.
 - Connect the enquiry form to a backend/CRM if enquiries should be stored or processed automatically. This static version validates the form and prepares an email draft; it does not store lead data.
